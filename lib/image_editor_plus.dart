@@ -587,7 +587,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
               children: <Widget>[
                 BottomButton(
                   // icon: Icons.crop,
-                  image: "assets/crop.png",
+                  image: "assets/images/crop.png",
                   color: Colors.white,
                   text: 'Crop',
                   onTap: () async {
@@ -615,7 +615,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                 ),
                 BottomButton(
                   // icon: Icons.photo,
-                  image: "assets/cfilter.png",
+                  image: "assets/images/cfilter.png",
                   text: 'Color Filter',
                   onTap: () async {
                     resetTransformation();
@@ -693,11 +693,12 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                     });
                   },
                 ),
-                BottomButton(image: "assets/signature.png", text: "Signature"),
+                BottomButton(
+                    image: "assets/images/signature.png", text: "Signature"),
 
                 BottomButton(
                   // icon: Icons.text_fields,
-                  image: "assets/text.png",
+                  image: "assets/images/text.png",
                   color: Colors.white,
                   text: 'Text',
                   onTap: () async {
@@ -719,11 +720,12 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   },
                 ),
 
-                BottomButton(image: "assets/highlight.png", text: "Highlights"),
+                BottomButton(
+                    image: "assets/images/highlight.png", text: "Highlights"),
 
                 BottomButton(
                   // icon: Icons.edit,
-                  image: "assets/doodle.png",
+                  image: "assets/images/doodle.png",
 
                   text: 'Doodle',
                   onTap: () async {
@@ -751,7 +753,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   },
                 ),
                 BottomButton(
-                    image: "assets/copy.png",
+                    image: "assets/images/copy.png",
                     text: "Copy",
                     color: Colors.white),
                 BottomButton(
