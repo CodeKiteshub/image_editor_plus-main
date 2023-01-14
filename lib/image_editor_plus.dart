@@ -22,6 +22,7 @@ import 'package:image_editor_plus/layers/image_layer.dart';
 import 'package:image_editor_plus/layers/text_layer.dart';
 import 'package:image_editor_plus/modules/all_emojies.dart';
 import 'package:image_editor_plus/modules/text.dart';
+import 'package:image_editor_plus/signature.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:screenshot/screenshot.dart';
@@ -788,7 +789,17 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                     });
                   },
                 ),
-                BottomButton(image: widget.signatureImage, text: "Signature"),
+                BottomButton(
+                  image: widget.signatureImage,
+                  text: "Signature",
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Signature(),
+                        ));
+                  },
+                ),
 
                 BottomButton(
                   image: widget.textImage,
