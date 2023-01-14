@@ -41,7 +41,17 @@ String i18n(String sourceString) =>
 class ImageEditor extends StatelessWidget {
   final Uint8List? image;
   final List? images;
-
+  final Image rotateleftImage;
+  final Image rotaterightImage;
+  final Image flipImage;
+  final Image copyImage;
+  final Image textImage;
+  final Image signatureImage;
+  final Image doodleImage;
+  final Image highlightImage;
+  final Image moreImage;
+  final Image cropImage;
+  final Image cfilterImage;
   final Directory? savePath;
   final int maxLength;
   final bool allowGallery, allowCamera, allowMultiple;
@@ -55,7 +65,18 @@ class ImageEditor extends StatelessWidget {
       this.allowGallery = false,
       this.allowMultiple = false,
       this.maxLength = 99,
-      Color? appBar})
+      Color? appBar,
+      required this.rotateleftImage,
+      required this.rotaterightImage,
+      required this.flipImage,
+      required this.copyImage,
+      required this.textImage,
+      required this.signatureImage,
+      required this.doodleImage,
+      required this.highlightImage,
+      required this.moreImage,
+      required this.cropImage,
+      required this.cfilterImage})
       : super(key: key);
 
   @override
@@ -67,6 +88,17 @@ class ImageEditor extends StatelessWidget {
 
     if ((image == null || images != null) && allowMultiple == true) {
       return MultiImageEditor(
+        cropImage: cropImage,
+        copyImage: copyImage,
+        rotateleftImage: rotateleftImage,
+        rotaterightImage: rotaterightImage,
+        cfilterImage: cfilterImage,
+        flipImage: flipImage,
+        textImage: textImage,
+        highlightImage: highlightImage,
+        signatureImage: signatureImage,
+        doodleImage: doodleImage,
+        moreImage: moreImage,
         images: images ?? [],
         savePath: savePath,
         allowCamera: allowCamera,
@@ -76,6 +108,17 @@ class ImageEditor extends StatelessWidget {
       );
     } else {
       return SingleImageEditor(
+        cropImage: cropImage,
+        copyImage: copyImage,
+        rotateleftImage: rotateleftImage,
+        rotaterightImage: rotaterightImage,
+        cfilterImage: cfilterImage,
+        flipImage: flipImage,
+        textImage: textImage,
+        highlightImage: highlightImage,
+        signatureImage: signatureImage,
+        doodleImage: doodleImage,
+        moreImage: moreImage,
         image: image,
         savePath: savePath,
         allowCamera: allowCamera,
@@ -117,6 +160,17 @@ class ImageEditor extends StatelessWidget {
 class MultiImageEditor extends StatefulWidget {
   final Directory? savePath;
   final List images;
+  final Image rotateleftImage;
+  final Image rotaterightImage;
+  final Image flipImage;
+  final Image copyImage;
+  final Image textImage;
+  final Image signatureImage;
+  final Image doodleImage;
+  final Image highlightImage;
+  final Image moreImage;
+  final Image cropImage;
+  final Image cfilterImage;
   final int maxLength;
   final bool allowGallery, allowCamera, allowMultiple;
 
@@ -128,6 +182,17 @@ class MultiImageEditor extends StatefulWidget {
     this.allowGallery = false,
     this.allowMultiple = false,
     this.maxLength = 99,
+    required this.rotateleftImage,
+    required this.rotaterightImage,
+    required this.flipImage,
+    required this.copyImage,
+    required this.textImage,
+    required this.signatureImage,
+    required this.doodleImage,
+    required this.highlightImage,
+    required this.moreImage,
+    required this.cropImage,
+    required this.cfilterImage,
   }) : super(key: key);
 
   @override
@@ -219,6 +284,17 @@ class _MultiImageEditorState extends State<MultiImageEditor> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => SingleImageEditor(
+                                cropImage: widget.cropImage,
+                                rotateleftImage: widget.rotateleftImage,
+                                rotaterightImage: widget.rotaterightImage,
+                                cfilterImage: widget.cfilterImage,
+                                highlightImage: widget.highlightImage,
+                                doodleImage: widget.doodleImage,
+                                textImage: widget.textImage,
+                                signatureImage: widget.signatureImage,
+                                moreImage: widget.moreImage,
+                                flipImage: widget.flipImage,
+                                copyImage: widget.copyImage,
                                 image: image,
                               ),
                             ),
@@ -304,6 +380,17 @@ class _MultiImageEditorState extends State<MultiImageEditor> {
 class SingleImageEditor extends StatefulWidget {
   final Directory? savePath;
   final dynamic image;
+  final Image rotateleftImage;
+  final Image rotaterightImage;
+  final Image flipImage;
+  final Image copyImage;
+  final Image textImage;
+  final Image signatureImage;
+  final Image doodleImage;
+  final Image highlightImage;
+  final Image moreImage;
+  final Image cropImage;
+  final Image cfilterImage;
   final List? imageList;
   final bool allowCamera, allowGallery;
 
@@ -314,6 +401,17 @@ class SingleImageEditor extends StatefulWidget {
     this.imageList,
     this.allowCamera = false,
     this.allowGallery = false,
+    required this.cropImage,
+    required this.rotateleftImage,
+    required this.rotaterightImage,
+    required this.flipImage,
+    required this.copyImage,
+    required this.textImage,
+    required this.signatureImage,
+    required this.doodleImage,
+    required this.highlightImage,
+    required this.moreImage,
+    required this.cfilterImage,
   }) : super(key: key);
 
   @override
@@ -586,9 +684,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
               scrollDirection: Axis.horizontal,
               children: <Widget>[
                 BottomButton(
-                  // icon: Icons.crop,
-                  image: "assets/images/crop.png",
-                  color: Colors.white,
+                  image: widget.cropImage,
                   text: 'Crop',
                   onTap: () async {
                     resetTransformation();
@@ -614,8 +710,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   },
                 ),
                 BottomButton(
-                  // icon: Icons.photo,
-                  image: "assets/images/cfilter.png",
+                  image: widget.cfilterImage,
                   text: 'Color Filter',
                   onTap: () async {
                     resetTransformation();
@@ -661,7 +756,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   },
                 ),
                 BottomButton(
-                  icon: Icons.rotate_left,
+                  image: widget.rotateleftImage,
                   text: 'Rotate left',
                   onTap: () {
                     var t = currentImage.width;
@@ -673,7 +768,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   },
                 ),
                 BottomButton(
-                  icon: Icons.rotate_right,
+                  image: widget.rotaterightImage,
                   text: 'Rotate right',
                   onTap: () {
                     var t = currentImage.width;
@@ -685,7 +780,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   },
                 ),
                 BottomButton(
-                  icon: Icons.flip,
+                  image: widget.flipImage,
                   text: 'Flip',
                   onTap: () {
                     setState(() {
@@ -693,12 +788,10 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                     });
                   },
                 ),
-                BottomButton(
-                    image: "assets/images/signature.png", text: "Signature"),
+                BottomButton(image: widget.signatureImage, text: "Signature"),
 
                 BottomButton(
-                  // icon: Icons.text_fields,
-                  image: "assets/images/text.png",
+                  image: widget.textImage,
                   color: Colors.white,
                   text: 'Text',
                   onTap: () async {
@@ -720,13 +813,10 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   },
                 ),
 
-                BottomButton(
-                    image: "assets/images/highlight.png", text: "Highlights"),
+                BottomButton(image: widget.highlightImage, text: "Highlights"),
 
                 BottomButton(
-                  // icon: Icons.edit,
-                  image: "assets/images/doodle.png",
-
+                  image: widget.doodleImage,
                   text: 'Doodle',
                   onTap: () async {
                     var drawing = await Navigator.push(
@@ -753,11 +843,11 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   },
                 ),
                 BottomButton(
-                    image: "assets/images/copy.png",
-                    text: "Copy",
-                    color: Colors.white),
+                    image: widget.copyImage, text: "Copy", color: Colors.white),
                 BottomButton(
-                    text: "More", icon: FontAwesomeIcons.ellipsisVertical)
+                  image: widget.moreImage,
+                  text: "More",
+                )
                 // BottomButton(
                 //   icon: Icons.blur_on,
                 //   text: 'Blur',
@@ -980,8 +1070,8 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
 /// Button used in bottomNavigationBar in ImageEditor
 class BottomButton extends StatelessWidget {
   final VoidCallback? onTap, onLongPress;
-  final IconData? icon;
-  final String? image;
+
+  final Image image;
   final Color? color;
   final String text;
 
@@ -989,10 +1079,9 @@ class BottomButton extends StatelessWidget {
     Key? key,
     this.onTap,
     this.onLongPress,
-    this.icon,
     required this.text,
-    this.image,
     this.color,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -1002,15 +1091,7 @@ class BottomButton extends StatelessWidget {
       onLongPress: onLongPress,
       child: Column(
         children: [
-          Icon(
-            icon,
-            color: Colors.white,
-          ),
-          Image.asset(
-            image!,
-            scale: 3.5,
-            color: color,
-          ),
+          image,
           const SizedBox(height: 8),
           Text(
             i18n(text),
