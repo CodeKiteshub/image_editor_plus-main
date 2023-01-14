@@ -35,6 +35,7 @@ dependencies:
   colorfilter_generator: ^0.0.8
   hand_signature: ^2.3.0+1
   image_compression_flutter: ^1.0.2
+  pspdfkit_flutter: ^3.4.1
 
 dev_dependencies:
   flutter_test:

@@ -25,6 +25,7 @@ import 'package:image_editor_plus/modules/text.dart';
 import 'package:image_editor_plus/signature.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:pspdfkit_flutter/pspdfkit.dart';
 import 'package:screenshot/screenshot.dart';
 
 import 'modules/colors_picker.dart';
@@ -796,7 +797,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Signature(),
+                          builder: (context) => Signature(),
                         ));
                   },
                 ),
@@ -824,7 +825,25 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   },
                 ),
 
-                BottomButton(image: widget.highlightImage, text: "Highlights"),
+                BottomButton(
+                  image: widget.highlightImage,
+                  text: "Highlights",
+                  onTap: () async {
+                    var drawing = await highlight(currentImage.image);
+                    if (drawing != null) {
+                      undoLayers.clear();
+                      removedLayers.clear();
+
+                      layers.add(
+                        ImageLayerData(
+                          image: ImageItem(drawing),
+                        ),
+                      );
+
+                      setState(() {});
+                    }
+                  },
+                ),
 
                 BottomButton(
                   image: widget.doodleImage,
@@ -1076,6 +1095,14 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
 
     setState(() {});
   }
+}
+
+highlight(dynamic image) async {
+  await Pspdfkit.addAnnotation(image);
+  dynamic allAnnotations =
+      await Pspdfkit.getAnnotations(0, 'pspdfkit/markup/highlight');
+  print(allAnnotations);
+  return allAnnotations;
 }
 
 /// Button used in bottomNavigationBar in ImageEditor
